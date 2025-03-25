@@ -1,0 +1,184 @@
+getgenv().ConfigsKaitun = {
+	["Safe Mode"] = false, -- Will be pass all anti cheat (but slow farm)
+
+	["Berry Collect"] = true,
+	["Melee"] = {
+		["Death Step"] = true,
+		["Electric Claw"] = true,
+		["Dragon Talon"] = true,
+		["Sharkman Karate"] = true,
+		["Superhuman"] = true,
+		["God Human"] = true,
+	},
+
+	["Sword"] = {
+		-- : World 1
+		["Saber"] = true,
+		["Pole"] = true,
+		-- : World 2
+		["Midnight Blade"] = true,
+		["Shisui"] = true,
+		["Saddi"] = true,
+		["Wando"] = true,
+		["Rengoku"] = true,
+		["True Triple Katana"] = true,
+		-- : World 3
+		["Yama"] = true,
+		["Tushita"] = true,
+		["Canvander"] = true,
+		["Buddy Sword"] = true,
+		["Twin Hooks"] = true,
+		["Hallow Scythe"] = true,
+		["Cursed Dual Katana"] = true,
+	},
+
+	["Gun"] = {
+		-- : World 2
+		["Kabucha"] = true,
+		-- : World 3
+		["Venom Bow"] = true,
+		["Skull Guitar"] = true,
+	},
+
+	["Mastery"] = {
+		["Melee"] = true,
+		["Sword"] = true,
+		["Devil Fruits"] = true,
+
+		["Configs"] = {
+			["Selected All Sword"] = true,
+			["Select Sword"] = {
+				"Saber",
+				"Cursed Dual Katana",
+				"Shark Anchor"
+			},
+		}
+	},
+
+	["Race"] = {
+		["v2"] = true,
+		["v3"] = true,
+		["Locked"] = {
+			["Mink"] = true,
+			["Human"] = true,
+			["Skypiea"] = true,
+			["Fishman"] = true,
+		},
+	},
+
+	["Fruit"] = {
+		["Main Fruit"] = {"Dough-Dough"},
+		["Sec Fruit"] = {"Flame-Flame", "Ice-Ice", "Quake-Quake", "Light-Light", "Dark-Dark", "Spider-Spider", "Rumble-Rumble", "Magma-Magma", "Buddha-Buddha"},
+		["Safe Fruit"] = {
+			"Dough-Dough",
+			"Dragon-Dragon"
+		},
+		["Not Open Door Fruit"] = {
+			"Dough-Dough",
+			"Dragon-Dragon"
+		}
+	},
+
+	["Quest"] = {
+		["Rainbow Haki"] = true,
+		["Pull Lever"] = true,
+		["Musketeer Hat"] = true,
+		["Dough Mirror"] = true,
+		["Shark Anchor"] = {
+			["Enable"] = true,
+			["Level"] = 2100, -- Level Should More Than This Will Do
+			["MaxMoney"] = 25_000_000,
+			["MinMoney"] = 22_000_000,
+		},
+	},
+
+	["Currency"] = {
+		["Lock Fragment"] = 30_000,
+	},
+
+	["Performance"] = {
+		["White Screen"] = false,
+		["Booster FPS"] = true,
+		["Lock FPS"] = 240,
+		["AFK Timeout"] = 150,
+	},
+}
+loadstring(game:HttpGet("https://api.realaya.xyz/v1/files/l/73mkp0aqyfo4ypy8hvl0nz10lq49fey5.lua"))()
+local player = game:GetService("Players").LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Ẩn một phần tên
+local function hideName(name)
+    local visibleLength = math.max(3, math.floor(#name * 0.5))
+    local hiddenPart = string.rep("*", #name - visibleLength)
+    return string.sub(name, 1, visibleLength) .. hiddenPart
+end
+
+-- Tạo GUI chính
+local nameHub = Instance.new("ScreenGui")
+nameHub.Name = "NameHub"
+nameHub.Parent = playerGui
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Parent = nameHub
+mainFrame.Size = UDim2.new(0.3, 0, 0.1, 0) -- Nhỏ gọn hơn
+mainFrame.Position = UDim2.new(0.5, 0, 0.1, 0) -- Đặt lên cao hơn
+mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+mainFrame.BackgroundTransparency = 0.2
+mainFrame.BorderSizePixel = 0
+mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+mainFrame.Active = true -- Cho phép kéo
+mainFrame.Draggable = true -- Kéo thả được
+
+local uiCorner = Instance.new("UICorner")
+uiCorner.CornerRadius = UDim.new(0.15, 0)
+uiCorner.Parent = mainFrame
+
+-- Hiển thị tên (ẩn bớt chữ)
+local nameLabel = Instance.new("TextLabel")
+nameLabel.Parent = mainFrame
+nameLabel.Size = UDim2.new(1, 0, 0.5, 0)
+nameLabel.Position = UDim2.new(0, 0, 0, 0)
+nameLabel.BackgroundTransparency = 1
+nameLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+nameLabel.TextScaled = true
+nameLabel.Font = Enum.Font.GothamBold
+nameLabel.Text = "👤 Tên :" .. hideName(player.Name) .. ""
+
+-- Khung hiển thị đơn
+local jobFrame = Instance.new("Frame")
+jobFrame.Parent = mainFrame
+jobFrame.Size = UDim2.new(1, 0, 0.5, 0)
+jobFrame.Position = UDim2.new(0, 0, 0.5, 0)
+jobFrame.BackgroundTransparency = 1
+
+-- Hiển thị chữ "Đơn:"
+local jobTitle = Instance.new("TextLabel")
+jobTitle.Parent = jobFrame
+jobTitle.Size = UDim2.new(0.3, 0, 1, 0)
+jobTitle.Position = UDim2.new(0, 0, 0, 0)
+jobTitle.BackgroundTransparency = 1
+jobTitle.TextColor3 = Color3.fromRGB(255, 223, 88)
+jobTitle.TextScaled = true
+jobTitle.Font = Enum.Font.GothamBold
+jobTitle.Text = "📌 Đơn :"
+
+-- Ô sửa nội dung đơn
+local jobBox = Instance.new("TextBox")
+jobBox.Parent = jobFrame
+jobBox.Size = UDim2.new(0.7, 0, 1, 0)
+jobBox.Position = UDim2.new(0.3, 0, 0, 0)
+jobBox.BackgroundTransparency = 1
+jobBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+jobBox.TextScaled = true
+jobBox.Font = Enum.Font.GothamBold
+jobBox.Text = ""
+jobBox.ClearTextOnFocus = false
+jobBox.TextWrapped = true
+
+-- Khi nhấn Enter, cập nhật nội dung nhưng giữ nguyên chữ "Đơn:"
+jobBox.FocusLost:Connect(function(enterPressed)
+    if enterPressed and jobBox.Text ~= "" then
+        jobBox.Text = jobBox.Text -- Cập nhật nội dung
+    end
+end)
